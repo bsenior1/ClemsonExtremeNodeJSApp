@@ -38,12 +38,12 @@ app.get('/process_get', function(req, res) {
 	},
 	function (error, response, body) {
 		console.log(body)
+		var  = body
 	});
 	
 })
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
-  var consoleLog = console.log.body("server starting on " + appEnv.url);
-  //JSON.parse();
+  var body = console.log("server starting on " + appEnv.url);
 });
