@@ -38,7 +38,7 @@ app.get('/process_get', function(req, res) {
 	},
 	function (error, response, body) {
 		console.log(body),
-		var  = body
+		var sample = body
 	});
 	
 })
