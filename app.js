@@ -38,7 +38,7 @@ app.get('/process_get', function(req, res) {
 	},
 	function (error, response, body) {
 		var sample = JSON.parse(body)
-		console.log(sample.num)
+		console.log(sample.units)
 	});
 	
 })
