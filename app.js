@@ -38,7 +38,8 @@ app.get('/process_get', function(req, res) {
 	},
 	function (error, response, body) {
 		console.log(body),
-		JSON.parse(body)
+		object = JSON.parse(body),
+		console.log(object.num)
 	});
 	
 })
