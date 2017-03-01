@@ -37,13 +37,13 @@ app.get('/process_get', function(req, res) {
 		json: true
 	},
 	function (error, response, body) {
-		var object = JSON.parse(body),
-		console.log(object.num)
+		var sample = JSON.parse(body),
+		console.log(sample.num)
 	});
 	
 })
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
-  var body = console.log("server starting on " + appEnv.url);
+  console.log("server starting on " + appEnv.url);
 });
