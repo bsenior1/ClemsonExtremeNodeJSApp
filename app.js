@@ -38,8 +38,8 @@ app.get('/process_get', function(req, res) {
 	},
 	function (error, response, body) {
 		//var sample = JSON.parse(body)
-		strBody = JSON.stringify(body)
-		console.log(strBody)
+		//strBody = JSON.stringify(body)
+		console.log("The Parsed MetaData: ", body.metadata)
 	});
 	
 })
