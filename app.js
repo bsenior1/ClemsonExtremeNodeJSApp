@@ -38,7 +38,8 @@ app.get('/process_get', function(req, res) {
 	},
 	function (error, response, body) {
 		//var sample = JSON.parse(body)
-		console.log(body)
+		strBody = JSON.stringify(body)
+		console.log(strBody)
 	});
 	
 })
