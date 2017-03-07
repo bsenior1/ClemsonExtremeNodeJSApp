@@ -46,7 +46,7 @@ function getWeather(){
 	},
 	function (error, response, body) {
 		console.log(metadataCount + " - The Parsed MetaData: ", body.metadata);
-		res.end(JSON.stringify(body.metadata));
+		//res.end(JSON.stringify(body.metadata));
 	});
 	
 }
