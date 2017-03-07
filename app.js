@@ -32,7 +32,7 @@ app.get('/process_get', function(req, res) {
 		longitude:req.query.longitude
 	};
 
-    setInterval(getWeather, 5000);	
+    
 })
 
 function getWeather(){
@@ -53,5 +53,6 @@ function getWeather(){
 app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on ", appEnv.url);
+  setInterval(getWeather, 5000);
 });
 
