@@ -75,6 +75,7 @@ function getWeather(){
 	function (error, response, body) {
 		if(body.hasOwnProperty('forecasts')) {
 		  console.log(metadataCount + " - The Parsed MetaData: ", body.forecasts[0]);
+		  deviceClient.publish("status","json", body.forecasts[0]);
 		}
 	});
 	
