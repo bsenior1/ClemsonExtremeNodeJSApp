@@ -68,14 +68,14 @@ app.get('/process_get', function(req, res) {
 function getWeather(){
 	var callURL = "https://8d06e217-8e7e-49ca-91d9-8f1dd6f85d88:TAao24v59K@twcservice.mybluemix.net/api/weather/v1/geocode/"+response.latitude+"/"+response.longitude+"/forecast/hourly/48hour.json?units=m&language=en-US";
 	
-	++metadataCount;
 	request.get(callURL, {
 		json: true
 	},
 	function (error, response, body) {
 		if(body.hasOwnProperty('forecasts')) {
 		  console.log(metadataCount + " - The Parsed MetaData: ", body.forecasts[0]);
-		  deviceClient.publish("status","json", body.forecasts[0]);
+		  deviceClient.publish("status","json", JSON.stringify(body.forecasts[0]));
+		  ++metadataCount;
 		}
 	});
 	
