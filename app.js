@@ -62,7 +62,7 @@ app.get('/process_get', function(req, res) {
 	
 	setInterval(function(){
 	  getWeather();
-	}, 5000);
+	}, 15000);
 })
 
 function getWeather(){
@@ -72,6 +72,7 @@ function getWeather(){
 		json: true
 	},
 	function (error, response, body) {
+		// Avoid cases where JSON property is undefined - application crashes
 		if(body.hasOwnProperty('forecasts')) {
 		  console.log(metadataCount + " - The Parsed MetaData: ", body.forecasts[0]);
 		  deviceClient.publish("status","json", JSON.stringify(body.forecasts[0]));
