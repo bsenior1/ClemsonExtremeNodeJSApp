@@ -6,6 +6,7 @@
 
 // This application uses express as its web server
 // for more info, see: http://expressjs.com
+var weatherIntervalID;
 var metadataCount = 0;
 var express = require('express');
 	request = require('request'),
@@ -32,7 +33,7 @@ app.get('/process_get', function(req, res) {
 		longitude:req.query.longitude
 	};
 	
-	setInterval(function(){
+	weatherIntervalID = setInterval(function(){
 	  getWeather();
 	}, 5000);
 })
@@ -50,6 +51,10 @@ function getWeather(){
 	});
 	
 }
+
+window.onunload = function() {
+	clearInterval(weatherIntervalID);
+};
 
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
