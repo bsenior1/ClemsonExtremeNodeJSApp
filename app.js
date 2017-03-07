@@ -44,12 +44,6 @@ deviceClient.connect();
 deviceClient.on('connect', function () {
   console.log("Device Connected");
   
-  con.end(function(err) {
-  // The connection is terminated gracefully
-  // Ensures all previously enqueued queries are still
-  // before sending a COM_QUIT packet to the MySQL server.
-  });
-  
 });
 
 
