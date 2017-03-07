@@ -5,8 +5,7 @@
 //------------------------------------------------------------------------------
 
 // This application uses express as its web server
-// for more info, see: http://expressjs.com
-var weatherIntervalID;
+// for more info, see: http://expressjs.co
 var metadataCount = 0;
 var Client = require('ibmiotf');
 var express = require('express');
@@ -36,6 +35,7 @@ var config = {
     "auth-method" : "token",
     "auth-token" : "PY&Lzd105iT7QuRhg&"
 };
+
 var deviceClient = new Client.IotfDevice(config);
 deviceClient.connect();
 
@@ -66,7 +66,7 @@ app.get('/process_get', function(req, res) {
 		longitude:req.query.longitude
 	};
 	
-	weatherIntervalID = setInterval(function(){
+	setInterval(function(){
 	  getWeather();
 	}, 5000);
 })

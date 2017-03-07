@@ -9,7 +9,8 @@
 		"express": "4.13.x",
 		"cfenv": "1.0.x",
 		"request" : "2.79.0",
-		"lodash" : "1.x.x"
+		"lodash" : "1.x.x",
+		"ibmiotf" : "0.2.x"
 	},
 	"repository": {},
 	"engines": {
