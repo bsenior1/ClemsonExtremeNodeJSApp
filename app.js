@@ -31,7 +31,8 @@ app.get('/process_get', function(req, res) {
 		latitude:req.query.latitude,
 		longitude:req.query.longitude
 	};
-	
+
+    setInterval(getWeather, 5000);	
 })
 
 function getWeather(){
@@ -47,8 +48,6 @@ function getWeather(){
 	});
 	
 }
-
-setInterval(getWeather, 5000);
 
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
