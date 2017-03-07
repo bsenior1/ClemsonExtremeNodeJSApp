@@ -32,7 +32,9 @@ app.get('/process_get', function(req, res) {
 		longitude:req.query.longitude
 	};
 	
-	setInterval(getWeather, 5000);
+	setInterval(function(){
+	  getWeather();
+	}, 5000);
 })
 
 function getWeather(){
