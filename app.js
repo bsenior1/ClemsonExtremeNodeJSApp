@@ -8,6 +8,7 @@
 // for more info, see: http://expressjs.com
 var weatherIntervalID;
 var metadataCount = 0;
+var Client = require('ibmiotf');
 var express = require('express');
 	request = require('request'),
 	
@@ -25,6 +26,38 @@ app.use(express.static(__dirname + '/public'));
 
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
+
+// --------------------
+var config = {
+    "org" : "wkabcg",
+    "id" : "deviceid1",
+    "domain": "internetofthings.ibmcloud.com",
+    "type" : "Device1",
+    "auth-method" : "token",
+    "auth-token" : "PY&Lzd105iT7QuRhg&"
+};
+var deviceClient = new Client.IotfDevice(config);
+deviceClient.connect();
+
+// -------------------
+
+deviceClient.on('connect', function () {
+  console.log("Device Connected");
+  
+  con.end(function(err) {
+  // The connection is terminated gracefully
+  // Ensures all previously enqueued queries are still
+  // before sending a COM_QUIT packet to the MySQL server.
+  });
+  
+});
+
+
+deviceClient.on("error", function (err) {
+    console.log("Error : **************************************************************************************************************************************************"+err);
+});
+
+// -------------------
 
 app.get('/process_get', function(req, res) {
 	// prepare output in json format
@@ -51,10 +84,6 @@ function getWeather(){
 	});
 	
 }
-
-window.onunload = function() {
-	clearInterval(weatherIntervalID);
-};
 
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
