@@ -73,7 +73,7 @@ function getWeather(){
 		json: true
 	},
 	function (error, response, body) {
-		console.log(metadataCount + " - The Parsed MetaData: ", body.metadata);
+		console.log(metadataCount + " - The Parsed MetaData: ", body);
 		//res.end(JSON.stringify(body.metadata));
 	});
 	
