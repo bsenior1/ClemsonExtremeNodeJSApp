@@ -6,6 +6,7 @@
 
 // This application uses express as its web server
 // for more info, see: http://expressjs.com
+var metadataCount = 0;
 var express = require('express');
 	request = require('request'),
 	
@@ -31,19 +32,27 @@ app.get('/process_get', function(req, res) {
 		longitude:req.query.longitude
 	};
 	
+})
+
+function getWeather(){
 	var callURL = "https://8d06e217-8e7e-49ca-91d9-8f1dd6f85d88:TAao24v59K@twcservice.mybluemix.net/api/weather/v1/geocode/"+response.latitude+"/"+response.longitude+"/forecast/hourly/48hour.json?units=m&language=en-US";
 	
+	++metadataCount;
 	request.get(callURL, {
 		json: true
 	},
 	function (error, response, body) {
-		console.log("The Parsed MetaData: ", body.metadata);
+		console.log(metadataCount + " - The Parsed MetaData: ", body.metadata);
 		res.end(JSON.stringify(body.metadata));
 	});
 	
-})
+}
+
+setInterval(getWeather, 5000);
+
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on ", appEnv.url);
 });
+
