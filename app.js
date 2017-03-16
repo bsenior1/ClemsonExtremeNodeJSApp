@@ -5,28 +5,18 @@
 //------------------------------------------------------------------------------
 
 // This application uses express as its web server
-// for more info, see: http://expressjs.co
-var metadataCount = 0;
-var Client = require('ibmiotf');
+// for more info, see: http://expressjs.com
 var express = require('express');
-	request = require('request'),
-	
-	_= require('lodash');
+var request = require('request');
+var Twitter = require('twitter');
 
 // cfenv provides access to your Cloud Foundry environment
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
 
-// create a new express server
-var app = express();
+var parser = require('json-parser');
 
-// serve the files out of ./public as our main files
-app.use(express.static(__dirname + '/public'));
-
-// get the app environment from Cloud Foundry
-var appEnv = cfenv.getAppEnv();
-
-// --------------------
+var Client = require("ibmiotf");
 var config = {
     "org" : "wkabcg",
     "id" : "deviceid1",
@@ -35,56 +25,93 @@ var config = {
     "auth-method" : "token",
     "auth-token" : "PY&Lzd105iT7QuRhg&"
 };
-
 var deviceClient = new Client.IotfDevice(config);
 deviceClient.connect();
 
-// -------------------
+var twitterClient = new Twitter({
+        consumer_key: 'uyGpIwSq2QmEjok8qsvAtwCW0',
+        consumer_secret: 'P1Jona5WwUE54WF8LjQHE8ZJa2zK7wKmLGTj8WPZyGHqeMhxHl',
+        access_token_key: '132337921-mWzwmPzlpWS9m5B7pw7T3VIWIgkPQQYUVkuGJqTG',
+        access_token_secret: 'waoDLEZrg14hV2dox0FwTUs4Qv5C3ReajWOtVnlLVigUM'
+    });
 
-deviceClient.on('connect', function () {
-  console.log("Device Connected");
-  
+// create a new express server
+var app = express();
+
+var timesGetWeatherCalled = 0;
+var weatherIntervalID;
+
+// serve the files out of ./public as our main files
+app.use(express.static(__dirname + '/public'));
+
+// get the app environment from Cloud Foundry
+var appEnv = cfenv.getAppEnv();
+
+// When the device connects
+deviceClient.on("connect", function() {
+	console.log("Device connected!");
 });
 
-
-deviceClient.on("error", function (err) {
-    console.log("Error : **************************************************************************************************************************************************"+err);
+// When the device receives an error
+deviceClient.on("error", function(err) {
+	console.log("Error! - " + err);
 });
 
-// -------------------
-
-app.get('/process_get', function(req, res) {
-	// prepare output in json format
+app.get('/process_get', function(req, res)
+{
+	timesGetWeatherCalled = 0;
+	// Prepare output in JSON format
 	response = {
-		latitude:req.query.latitude,
-		longitude:req.query.longitude
+		lat1: req.query.latitude1,
+		long1: req.query.longitude1,
+		lat2: req.query.latitude2,
+		long2: req.query.longitude2
 	};
 	
-	setInterval(function(){
-	  getWeather();
-	}, 15000);
-})
+	weatherIntervalID = setInterval(function() {
+		getWeather();
+	}, 10000);
 
-function getWeather(){
-	var callURL = "https://8d06e217-8e7e-49ca-91d9-8f1dd6f85d88:TAao24v59K@twcservice.mybluemix.net/api/weather/v1/geocode/"+response.latitude+"/"+response.longitude+"/forecast/hourly/48hour.json?units=m&language=en-US";
-	
-	request.get(callURL, {
-		json: true
-	},
-	function (error, response, body) {
-		// Avoid cases where JSON property is undefined - application crashes
-		if(body.hasOwnProperty('forecasts')) {
-		  console.log(metadataCount + " - The Parsed MetaData: ", body.forecasts[0]);
-		  deviceClient.publish("status","json", JSON.stringify(body.forecasts[0]));
-		  ++metadataCount;
-		}
+	var locationString = "";
+	locationString += response.lat1 + "," + response.long1 + "," + response.lat2 + "," + response.long2;
+	var stream = twitterClient.stream("statuses/filter", { locations: locationString });
+	stream.on("data", function(event) {
+		console.log(event && event.text);
+		deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
 	});
-	
+	// res.setHeader("Content-Type", "text/html");
+	// res.end("<form action='https://jpeterkdemoapp.mybluemix.net/process_get' method='GET'>" + 
+ //      		"Latitude: <input type='text' name='latitude' /><br />" + 
+ //      		"Longitude: <input type='text' name='longitude' /><br />" +
+ //      		"<input type='submit' text='submit' />" +
+ //    		"</form>" +
+ //    		"<p id='blankSpace'>" + JSON.stringify(body.forecasts) + "</p>");
+ //
+});
+
+function getWeather()
+{
+	if (timesGetWeatherCalled >= 5)
+	{
+		clearInterval(weatherIntervalID);
+		deviceClient.disconnect();
+	}
+	else
+	{
+		var callURL = "https://8d06e217-8e7e-49ca-91d9-8f1dd6f85d88:TAao24v59K@twcservice.mybluemix.net/api/weather/v1/geocode/" + response.lat1 + "/" + response.long1 + "/forecast/hourly/48hour.json?units=m&language=en-US";
+		request.get(callURL, {
+			json: true
+		},
+		function (error, response, body) {
+			console.log("forecast: " + body.forecasts);
+			deviceClient.publish("status", "json", JSON.stringify(body.forecasts));
+		});
+	}
+	timesGetWeatherCalled++;
 }
 
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
-  console.log("server starting on ", appEnv.url);
+  console.log("server starting on " + appEnv.url);
 });
-
