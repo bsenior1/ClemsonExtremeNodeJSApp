@@ -2,11 +2,11 @@
 var express = require('express');
 var request = require('request');
 var cfenv = require('cfenv');
-var weatherVar = require('./weather.js');
 
 // Weather Instance and weather limitation variables
 var weatherIntervalID = 0;
 var timesGetWeatherCalled = 0;
+var weatherVar = require('./weather.js');
 var weatherVarInstance = new weatherVar();
 
 // create a new express server
