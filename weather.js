@@ -48,7 +48,7 @@ self.getWeather = function(request)
 			json: true
 		},
 		function (error, response, body) {
-			console.log("forecast: " + body.forecasts[0]);
+			console.log("forecast: " + JSON.stringify(body.forecasts[0]));
 			deviceClient.publish("status", "json", JSON.stringify(body.forecasts[0]));
 		});
 	}
