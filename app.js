@@ -27,7 +27,7 @@ app.get('/process_get', function(req, res)
 
     timesGetWeatherCalled = 0;	
 	weatherIntervalID = setInterval(function() {
-		weatherVarInstance.getWeather();
+		weatherVarInstance.getWeather(req);
 	}, 10000);
 });
 

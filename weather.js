@@ -33,7 +33,7 @@ deviceClient.on("error", function(err) {
 
 
 // Function to publish forecast information to IOT Device
-self.getWeather = function()
+self.getWeather = function(request)
 {
 	if (timesGetWeatherCalled >= 5)
 	{
