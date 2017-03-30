@@ -1,3 +1,6 @@
+
+var weatherSetup = function() {
+	var self = this;
 //Dependencies
 var Client = require("ibmiotf");
 
@@ -30,7 +33,7 @@ deviceClient.on("error", function(err) {
 
 
 // Function to publish forecast information to IOT Device
-function getWeather()
+self.getWeather = function()
 {
 	if (timesGetWeatherCalled >= 5)
 	{
@@ -50,5 +53,7 @@ function getWeather()
 	}
 	++timesGetWeatherCalled;
 }
+}
 
+module.exports = weatherSetup;
 
