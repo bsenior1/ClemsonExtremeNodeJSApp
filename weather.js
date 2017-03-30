@@ -6,7 +6,7 @@ var Client = require("ibmiotf");
 
 // Variables for Limiting the Quantity of Weather Based Information Responses
 var timesGetWeatherCalled = 0;
-self.weatherIntervalID = 0;
+this.weatherIntervalID = 0;
 
 // IOT Device Configuration and Connection
 var config = {
