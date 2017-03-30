@@ -4,10 +4,6 @@ var weatherSetup = function() {
 //Dependencies
 var Client = require("ibmiotf");
 
-// Variables for Limiting the Quantity of Weather Based Information Responses
-var timesGetWeatherCalled = 0;
-var weatherIntervalID = 0;
-
 // IOT Device Configuration and Connection
 var config = {
     "org" : "wkabcg",
@@ -33,7 +29,7 @@ deviceClient.on("error", function(err) {
 
 
 // Function to publish forecast information to IOT Device
-self.getWeather = function(request)
+self.getWeather = function(request, response, weatherIntervalID)
 {
 	if (timesGetWeatherCalled >= 5)
 	{
