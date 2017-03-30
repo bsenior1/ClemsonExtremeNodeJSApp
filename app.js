@@ -4,6 +4,8 @@ var request = require('request');
 var cfenv = require('cfenv');
 var weatherVar = require('./weather.js');
 
+var weatherVarInstance = new weatherVar();
+
 // create a new express server
 var app = express();
 
@@ -25,7 +27,7 @@ app.get('/process_get', function(req, res)
 
     timesGetWeatherCalled = 0;	
 	weatherIntervalID = setInterval(function() {
-		weatherVar.getWeather();
+		weatherVarInstance.getWeather();
 	}, 10000);
 });
 
