@@ -37,7 +37,7 @@ self.getWeather = function(request, response)
 {
 	if (timesGetWeatherCalled >= 5)
 	{
-		clearInterval(weatherIntervalID);
+		clearInterval(this.weatherIntervalID);
 		deviceClient.disconnect();
 	}
 	else
