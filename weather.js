@@ -1,12 +1,12 @@
 
 var weatherSetup = function() {
-	var self = this;
+var self = this;
 //Dependencies
 var Client = require("ibmiotf");
 
 // Variables for Limiting the Quantity of Weather Based Information Responses
 var timesGetWeatherCalled = 0;
-this.weatherIntervalID = 0;
+self.weatherIntervalID = 0;
 
 // IOT Device Configuration and Connection
 var config = {
@@ -37,7 +37,7 @@ self.getWeather = function(request, response)
 {
 	if (timesGetWeatherCalled >= 5)
 	{
-		clearInterval(this.weatherIntervalID);
+		clearInterval(self.weatherIntervalID);
 		deviceClient.disconnect();
 	}
 	else
