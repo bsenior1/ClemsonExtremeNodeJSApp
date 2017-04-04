@@ -12,12 +12,12 @@ var weatherSetup = function() {
 
 	// IOT Device Configuration and Connection
 	var config = {
-		"org" : IOT_ORG,
-		"id" : IOT_ID,
-		"domain": IOT_DOMAIN,
-		"type" : IOT_TYPE,
-		"auth-method" : IOT_AUTHMETHOD,
-		"auth-token" : IOT_AUTHTOKEN
+		"org" : process.env.IOT_ORG,
+		"id" : process.env.IOT_ID,
+		"domain": process.env.IOT_DOMAIN,
+		"type" : process.env.IOT_TYPE,
+		"auth-method" : process.env.IOT_AUTHMETHOD,
+		"auth-token" : process.env.IOT_AUTHTOKEN
 	};
 	var deviceClient = new Client.IotfDevice(config);
 	deviceClient.connect();
