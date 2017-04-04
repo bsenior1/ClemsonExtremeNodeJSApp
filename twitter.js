@@ -26,6 +26,7 @@ var twitterSetup = function()
 		}
 		else 
 		{
+			console.log("Twitter");
 			var locationString = "";
 			locationString += response.long1 + "," + response.lat1 + "," + response.long2 + "," + response.lat2;
 			

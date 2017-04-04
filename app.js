@@ -29,15 +29,16 @@ app.get('/process_get', function(req, res)
 		long2: req.query.longitude2
 	};
 
+	// Perform Twitter Functionality every N milliseconds
+	twitterVarInstance.twitterIntervalID = setInterval(function() {
+		twitterVarInstance.getTwitter(request, response);
+	}, 10000);
+	
 	// Perform Weather Functionality every N milliseconds
 	weatherVarInstance.weatherIntervalID = setInterval(function() {
 		weatherVarInstance.getWeather(request, response);
 	}, 10000);
 	
-	// Perform Twitter Functionality every N milliseconds
-	twitterVarInstance.twitterIntervalID = setInterval(function() {
-		twitterVarInstance.getTwitter(request, response);
-	}, 10000);
 });
 
 
