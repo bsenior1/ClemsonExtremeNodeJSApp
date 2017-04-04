@@ -35,9 +35,9 @@ app.get('/process_get', function(req, res)
 	}, 10000);
 	
 	// Perform Weather Functionality every N milliseconds
-	weatherVarInstance.weatherIntervalID = setInterval(function() {
-		weatherVarInstance.getWeather(request, response);
-	}, 10000);
+	//weatherVarInstance.weatherIntervalID = setInterval(function() {
+		//weatherVarInstance.getWeather(request, response);
+	//}, 10000);
 	
 });
 

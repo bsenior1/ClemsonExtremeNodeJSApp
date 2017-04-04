@@ -26,6 +26,7 @@ var twitterSetup = function()
 		}
 		else 
 		{
+			++timesGetTwitterCalled;
 			console.log("Twitter");
 			var locationString = "";
 			locationString += response.long1 + "," + response.lat1 + "," + response.long2 + "," + response.lat2;
@@ -41,7 +42,6 @@ var twitterSetup = function()
 				throw error;
 			});
 		}
-		++timesGetTwitterCalled;
 	}
 }
 
