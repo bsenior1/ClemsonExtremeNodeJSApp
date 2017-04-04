@@ -20,21 +20,19 @@ var twitterSetup = function()
 	self.getTwitter = function(request, response) 
 	{
 		// Stop Repetition after N iterations
-		if (timesGetTwitterCalled > 3)
+		if (timesGetTwitterCalled > 1)
 		{ 
 			clearInterval(self.twitterIntervalID);
 		}
 		else 
 		{
-			++timesGetTwitterCalled;
 			console.log("Twitter");
 			var locationString = "";
-			locationString += response.long1 + "," + response.lat1 + "," + response.long2 + "," + response.lat2;
+			locationString += response.long1 + "," + response.lat1;
 			
-			var stream = twitterClient.stream("statuses/filter", { track: 'javascript' });
+			var stream = twitterClient.stream("statuses/filter", { locations: locationString });
 			stream.on("data", function(event) {
 				console.log(event && event.text);
-				console.log("twitter end");
 				//deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
 			});
 			
@@ -42,6 +40,7 @@ var twitterSetup = function()
 				throw error;
 			});
 		}
+		++timesGetTwitterCalled;
 	}
 }
 
