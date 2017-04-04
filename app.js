@@ -1,18 +1,22 @@
-// Dependencies
+// App Dependencies
 var express = require('express');
 var request = require('request');
 var cfenv = require('cfenv');
-var weatherVar = require('./weather.js');
 
+// Weather Dependencies and Instance
+var weatherVar = require('./weather.js');
 var weatherVarInstance = new weatherVar();
 
-// create a new express server
+var twitterVar = require('./twitter.js');
+var twitterVarInstance = new twitterVar();
+
+// Create a new express server
 var app = express();
 
-// serve the files out of ./public as our main files
+// Serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
 
-// get the app environment from Cloud Foundry
+// Get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 
 app.get('/process_get', function(req, res)
@@ -25,8 +29,14 @@ app.get('/process_get', function(req, res)
 		long2: req.query.longitude2
 	};
 
+	// Perform Weather Functionality every N milliseconds
 	weatherVarInstance.weatherIntervalID = setInterval(function() {
 		weatherVarInstance.getWeather(request, response);
+	}, 10000);
+	
+	// Perform Twitter Functionality every N milliseconds
+	twitterVarInstance.twitterIntervalID = setInterval(function() {
+		twitterVarInstance.getTwitter(request, response);
 	}, 10000);
 });
 
