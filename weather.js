@@ -12,12 +12,12 @@ var weatherSetup = function() {
 
 	// IOT Device Configuration and Connection
 	var config = {
-		"org" : "wkabcg",
-		"id" : "deviceid1",
-		"domain": "internetofthings.ibmcloud.com",
-		"type" : "Device1",
-		"auth-method" : "token",
-		"auth-token" : "PY&Lzd105iT7QuRhg&"
+		"org" : IOT_ORG,
+		"id" : IOT_ID,
+		"domain": IOT_DOMAIN,
+		"type" : IOT_TYPE,
+		"auth-method" : IOT_AUTHMETHOD,
+		"auth-token" : IOT_AUTHTOKEN
 	};
 	var deviceClient = new Client.IotfDevice(config);
 	deviceClient.connect();

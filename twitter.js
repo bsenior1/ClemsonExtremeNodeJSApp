@@ -26,14 +26,14 @@ var twitterSetup = function()
 		}
 		else 
 		{
-			console.log("Twitter");
 			var locationString = "";
 			locationString += response.long1 + "," + response.lat1 + "," + response.long2 + "," + response.lat2;
 			
+			// NOTE: tweets are in a stream format
 			var stream = twitterClient.stream("statuses/filter", { locations: locationString });
 			stream.on("data", function(event) {
-				console.log(event && event.text);
-				//deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
+				//console.log(event && event.text);
+				deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
 			});
 			
 			stream.on('error', function(error) {
