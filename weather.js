@@ -12,12 +12,12 @@ var weatherSetup = function() {
 
 	// IOT Device Configuration and Connection
 	var config = {
-		"org" : process.env.IOT_ORG,
-		"id" : process.env.IOT_ID,
-		"domain": process.env.IOT_DOMAIN,
-		"type" : process.env.IOT_TYPE,
-		"auth-method" : process.env.IOT_AUTHMETHOD,
-		"auth-token" : process.env.IOT_AUTHTOKEN
+		"org" : "wkabcg",
+		"id" : "deviceid1",
+		"domain": "internetofthings.ibmcloud.com",
+		"type" : "Device1",
+		"auth-method" : "token",
+		"auth-token" : "PY&Lzd105iT7QuRhg&"
 	};
 	var deviceClient = new Client.IotfDevice(config);
 	deviceClient.connect();
@@ -60,6 +60,4 @@ var weatherSetup = function() {
 }
 
 module.exports = weatherSetup;
-
-
 
