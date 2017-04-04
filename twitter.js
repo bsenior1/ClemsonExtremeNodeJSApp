@@ -30,7 +30,7 @@ var twitterSetup = function()
 			var locationString = "";
 			locationString += response.long1 + "," + response.lat1 + "," + response.long2 + "," + response.lat2;
 			
-			var stream = twitterClient.stream("statuses/filter", { locations: locationString });
+			var stream = twitterClient.stream("statuses/filter", { track: 'javascript' });
 			stream.on("data", function(event) {
 				console.log(event && event.text);
 				//deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
