@@ -10,6 +10,9 @@ var weatherVarInstance = new weatherVar();
 var twitterVar = require('./twitter.js');
 var twitterVarInstance = new twitterVar();
 
+var trafficVar = require('./traffic.js');
+var trafficVarInstance = new trafficVar();
+
 // Create a new express server
 var app = express();
 
@@ -35,10 +38,14 @@ app.get('/process_get', function(req, res)
 	//}, 10000);
 	
 	//Perform Weather Functionality every N milliseconds
-	weatherVarInstance.weatherIntervalID = setInterval(function() {
-		weatherVarInstance.getWeather(request, response);
+	//weatherVarInstance.weatherIntervalID = setInterval(function() {
+		//weatherVarInstance.getWeather(request, response);
+	//}, 10000);
+
+	// Perform Traffic Functionality every N milliseconds
+	trafficVarInstance.trafficIntervalID = setInterval(function() {
+		trafficVarInstance.getTraffic(request, response);
 	}, 10000);
-	
 });
 
 
