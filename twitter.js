@@ -20,10 +20,10 @@ var twitterSetup = function()
 	self.getTwitter = function(request, response) 
 	{
 		// Stop Repetition after N iterations
-		if (timesGetTwitterCalled > 3) 
-		{
+		if (timesGetTwitterCalled > 3)
+		{ 
 			clearInterval(self.twitterIntervalID);
-		{
+		}
 		else 
 		{
 			var locationString = "";
@@ -38,4 +38,5 @@ var twitterSetup = function()
 		++timesGetTwitterCalled;
 	}
 }
+
 module.exports = twitterSetup;
