@@ -33,7 +33,12 @@ var twitterSetup = function()
 			var stream = twitterClient.stream("statuses/filter", { track: 'javascript' });
 			stream.on("data", function(event) {
 				console.log(event && event.text);
+				console.log("twitter end");
 				//deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
+			});
+			
+			stream.on('error', function(error) {
+				throw error;
 			});
 		}
 		++timesGetTwitterCalled;
