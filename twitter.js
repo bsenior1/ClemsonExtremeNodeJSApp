@@ -27,7 +27,7 @@ var twitterSetup = function()
 		else 
 		{
 			var locationString = "";
-			locationString += response.lat1 + "," + response.long1 + "," + response.lat2 + "," + response.long2;
+			locationString += response.long1 + "," + response.lat1 + "," + response.long2 + "," + response.lat2;
 			
 			var stream = twitterClient.stream("statuses/filter", { locations: locationString });
 			stream.on("data", function(event) {
