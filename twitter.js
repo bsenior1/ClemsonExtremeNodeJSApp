@@ -1,4 +1,4 @@
-var twitterSetup = function() 
+var twitterSetup = function(deviceClient) 
 {
 	// Self Referentiation
 	var self = this;
@@ -33,7 +33,7 @@ var twitterSetup = function()
 			var stream = twitterClient.stream("statuses/filter", { locations: locationString });
 			stream.on('data', function(event) {
 				console.log(event && event.text);
-				//deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
+				deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
 			});
 			
 			stream.on('error', function(error) {
