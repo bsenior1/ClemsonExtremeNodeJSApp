@@ -1,4 +1,4 @@
-var twitterSetup = function(deviceClient) 
+var twitterSetup = function() 
 {
 	// Self Referentiation
 	var self = this;

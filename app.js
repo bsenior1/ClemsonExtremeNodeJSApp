@@ -32,7 +32,7 @@ deviceClient.on("error", function(err) {
 //var weatherVarInstance = new weatherVar(deviceClient);
 
 var twitterVar = require('./twitter.js');
-var twitterVarInstance = new twitterVar(deviceClient);
+var twitterVarInstance = new twitterVar();
 
 //var trafficVar = require('./traffic.js');
 //var trafficVarInstance = new trafficVar(deviceClient);
