@@ -32,8 +32,8 @@ var twitterSetup = function(deviceClient)
 			// NOTE: tweets are in a stream format
 			var stream = twitterClient.stream("statuses/filter", { locations: locationString });
 			stream.on("data", function(event) {
-				//console.log(event && event.text);
-				deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
+				console.log(event && event.text);
+				//deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
 			});
 			
 			//stream.on('error', function(error) {
