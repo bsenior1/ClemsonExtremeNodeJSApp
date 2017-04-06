@@ -1,5 +1,5 @@
 // Traffic Functionality
-var trafficSetup = function() {
+var trafficSetup = function(deviceClient) {
 	// Self Referentiation
 	var self = this;
 
@@ -8,7 +8,7 @@ var trafficSetup = function() {
 	self.trafficIntervalID = 0;
 
 	// Function to publish traffic information to IOT Device
-	self.getTraffic = function(request, response, deviceClient)
+	self.getTraffic = function(request, response)
 	{
 		// Disconnect from Device after N iterations
 		if (timesGetTrafficCalled > 3)
