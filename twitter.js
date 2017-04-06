@@ -5,7 +5,6 @@ var twitterSetup = function(deviceClient)
 	
 	// Dependencies
 	var Twitter = require('twitter');
-	var countTwitter = 0;
 	
 	// Variables for Limiting the Quantity of Twitter Based Information Responses
 	var timesGetTwitterCalled = 0;
@@ -33,10 +32,6 @@ var twitterSetup = function(deviceClient)
 			// NOTE: tweets are in a stream format
 			var stream = twitterClient.stream("statuses/filter", { locations: locationString });
 			stream.on('data', function(event) {
-				if (countTwitter == 3) {
-					++timesGetTwitterCalled;
-					return;
-				}
 				console.log(event && event.text);
 				deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
 				++countTwitter;
