@@ -28,11 +28,11 @@ deviceClient.on("error", function(err) {
 });
 
 // Weather Dependencies and Instance
-var weatherVar = require('./weather.js');
-var weatherVarInstance = new weatherVar(deviceClient);
+//var weatherVar = require('./weather.js');
+//var weatherVarInstance = new weatherVar(deviceClient);
 
-//var twitterVar = require('./twitter.js');
-//var twitterVarInstance = new twitterVar(deviceClient);
+var twitterVar = require('./twitter.js');
+var twitterVarInstance = new twitterVar(deviceClient);
 
 //var trafficVar = require('./traffic.js');
 //var trafficVarInstance = new trafficVar(deviceClient);
@@ -57,14 +57,14 @@ app.get('/process_get', function(req, res)
 	};
 
 	// Perform Twitter Functionality every N milliseconds
-	//twitterVarInstance.twitterIntervalID = setInterval(function() {
-		//twitterVarInstance.getTwitter(request, response);
-	//}, 10000);
+	twitterVarInstance.twitterIntervalID = setInterval(function() {
+		twitterVarInstance.getTwitter(request, response);
+	}, 10000);
 	
 	//Perform Weather Functionality every N milliseconds
-	weatherVarInstance.weatherIntervalID = setInterval(function() {
-		weatherVarInstance.getWeather(request, response);
-	}, 10000);
+	//weatherVarInstance.weatherIntervalID = setInterval(function() {
+		//weatherVarInstance.getWeather(request, response);
+	//}, 10000);
 
 	// Perform Traffic Functionality every N milliseconds
 	//trafficVarInstance.trafficIntervalID = setInterval(function() {
