@@ -37,7 +37,7 @@ var twitterSetup = function()
 			});
 			
 			stream.on('error', function(error) {
-				throw error;
+				console.log("Error: " + error);
 			});
 		}
 		++timesGetTwitterCalled;
