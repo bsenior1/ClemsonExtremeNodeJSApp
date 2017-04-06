@@ -38,9 +38,9 @@ var twitterSetup = function()
 				//deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
 			});
 			
-			//stream.on('error', function(error) {
-				//throw error;
-			//});
+			stream.on('error', function(error) {
+				throw error;
+			});
 		}
 		++timesGetTwitterCalled;
 	}
