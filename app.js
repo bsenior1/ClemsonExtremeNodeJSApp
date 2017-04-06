@@ -28,11 +28,11 @@ deviceClient.on("error", function(err) {
 });
 
 // Weather Dependencies and Instance
-//var weatherVar = require('./weather.js');
-//var weatherVarInstance = new weatherVar(deviceClient);
+var weatherVar = require('./weather.js');
+var weatherVarInstance = new weatherVar(deviceClient);
 
-var twitterVar = require('./twitter.js');
-var twitterVarInstance = new twitterVar(deviceClient);
+//var twitterVar = require('./twitter.js');
+//var twitterVarInstance = new twitterVar(deviceClient);
 
 //var trafficVar = require('./traffic.js');
 //var trafficVarInstance = new trafficVar(deviceClient);
