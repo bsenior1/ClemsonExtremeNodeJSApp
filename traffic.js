@@ -2,15 +2,10 @@
 var trafficSetup = function() {
 	// Self Referentiation
 	var self = this;
-	
-	//Dependencies
 
 	// Variables for Limiting the Quantity of Traffic Based Information Responses
 	var timesGetTrafficCalled = 0;
 	self.trafficIntervalID = 0;
-
-	// Traffic Configuration and Connection
-
 
 	// Function to publish traffic information to IOT Device
 	self.getTraffic = function(request, response)
@@ -23,16 +18,18 @@ var trafficSetup = function() {
 		else
 		{
 			var locationString = "";
+			//According to bing api documentation schema is (South Latitude, West Longitude, North Latitude, East Longitude)
 			locationString += response.lat2 + "," + response.long1 + "," + response.lat1 + "," + response.long2;
 			
-			console.log("TRAFFIC!!!");
 			var trafficURL = "http://dev.virtualearth.net/REST/v1/Traffic/Incidents/"+locationString+"?key=Akl3RNr5drLME8fYbDEpoi--QuIbaK3aIgFZR7oycJ5TdY12QYZMs4D81I9TgzEX"
 			request.get(trafficURL, {
 				json: true
 			},
 			function (error, response, body) {
-				console.log("traffic: " + JSON.stringify(body.resourceSets));
-				//deviceClient.publish("status", "json", JSON.stringify(body.traffic));
+				// Note: for just traffic data use body.resourceSets 
+				// New api key is required
+				console.log("traffic: " + JSON.stringify(body));
+				deviceClient.publish("status", "json", JSON.stringify(body));
 			});	
 		}
 		++timesGetTrafficCalled;
