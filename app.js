@@ -1,7 +1,31 @@
 // App Dependencies
+var Client = require("ibmiotf");
 var express = require('express');
 var request = require('request');
 var cfenv = require('cfenv');
+
+// IOT Device Configuration and Connection
+var config = {
+	"org" : "wkabcg",
+	"id" : "deviceid1",
+	"domain": "internetofthings.ibmcloud.com",
+	"type" : "Device1",
+	"auth-method" : "token",
+	"auth-token" : "PY&Lzd105iT7QuRhg&"
+};
+var deviceClient = new Client.IotfDevice(config);
+deviceClient.connect();
+
+
+// When the device connects
+deviceClient.on("connect", function() {
+	console.log("Device connected!");
+});
+
+// When the device receives an error
+deviceClient.on("error", function(err) {
+	console.log("Error! - " + err);
+});
 
 // Weather Dependencies and Instance
 var weatherVar = require('./weather.js');
@@ -34,17 +58,17 @@ app.get('/process_get', function(req, res)
 
 	// Perform Twitter Functionality every N milliseconds
 	//twitterVarInstance.twitterIntervalID = setInterval(function() {
-		//twitterVarInstance.getTwitter(request, response);
+		//twitterVarInstance.getTwitter(request, response, deviceClient);
 	//}, 10000);
 	
 	//Perform Weather Functionality every N milliseconds
 	//weatherVarInstance.weatherIntervalID = setInterval(function() {
-		//weatherVarInstance.getWeather(request, response);
+		//weatherVarInstance.getWeather(request, response, deviceClient);
 	//}, 10000);
 
 	// Perform Traffic Functionality every N milliseconds
 	trafficVarInstance.trafficIntervalID = setInterval(function() {
-		trafficVarInstance.getTraffic(request, response);
+		trafficVarInstance.getTraffic(request, response, deviceClient);
 	}, 10000);
 });
 

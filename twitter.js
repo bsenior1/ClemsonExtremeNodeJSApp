@@ -17,7 +17,7 @@ var twitterSetup = function()
         access_token_secret: 'waoDLEZrg14hV2dox0FwTUs4Qv5C3ReajWOtVnlLVigUM'
     });
 	
-	self.getTwitter = function(request, response) 
+	self.getTwitter = function(request, response, deviceClient) 
 	{
 		// Stop Repetition after N iterations
 		if (timesGetTwitterCalled > 1)

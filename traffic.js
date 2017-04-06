@@ -8,7 +8,7 @@ var trafficSetup = function() {
 	self.trafficIntervalID = 0;
 
 	// Function to publish traffic information to IOT Device
-	self.getTraffic = function(request, response)
+	self.getTraffic = function(request, response, deviceClient)
 	{
 		// Disconnect from Device after N iterations
 		if (timesGetTrafficCalled > 3)
