@@ -1,5 +1,5 @@
 // Weather Functionality
-var weatherSetup = function() {
+var weatherSetup = function(deviceClient) {
 	// Self Referentiation
 	var self = this;
 
@@ -9,7 +9,7 @@ var weatherSetup = function() {
 
 
 	// Function to publish forecast information to IOT Device
-	self.getWeather = function(request, response, deviceClient)
+	self.getWeather = function(request, response)
 	{
 		// Disconnect from Device after N iterations
 		if (timesGetWeatherCalled > 3)

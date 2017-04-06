@@ -1,4 +1,4 @@
-var twitterSetup = function() 
+var twitterSetup = function(deviceClient) 
 {
 	// Self Referentiation
 	var self = this;
@@ -17,7 +17,7 @@ var twitterSetup = function()
         access_token_secret: 'waoDLEZrg14hV2dox0FwTUs4Qv5C3ReajWOtVnlLVigUM'
     });
 	
-	self.getTwitter = function(request, response, deviceClient) 
+	self.getTwitter = function(request, response) 
 	{
 		// Stop Repetition after N iterations
 		if (timesGetTwitterCalled > 1)
