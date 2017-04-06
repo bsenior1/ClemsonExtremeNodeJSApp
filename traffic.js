@@ -31,7 +31,7 @@ var trafficSetup = function() {
 				json: true
 			},
 			function (error, response, body) {
-				console.log("traffic: " + body);
+				console.log("traffic: " + JSON.stringify(body));
 				//deviceClient.publish("status", "json", JSON.stringify(body.traffic));
 			});	
 		}
