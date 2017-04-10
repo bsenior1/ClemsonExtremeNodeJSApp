@@ -6,12 +6,12 @@ var cfenv = require('cfenv');
 
 // IOT Device Configuration and Connection
 var config = {
-	"org" : "wkabcg",
-	"id" : "device2",
-	"domain": "internetofthings.ibmcloud.com",
-	"type" : "device2",
+	"org" : process.env.IOT_ORG,
+	"id" : process.env.IOT_ID,
+	"domain": process.env.IOT_DOMAIN,
+	"type" : process.env.IOT_TYPE,
 	"auth-method" : process.env.IOT_AUTHMETHOD,
-	"auth-token" : "TtrzE4719lzYb39DVt"
+	"auth-token" : process.env.IOT_AUTHTOKEN
 };
 var deviceClient = new Client.IotfDevice(config);
 deviceClient.connect();

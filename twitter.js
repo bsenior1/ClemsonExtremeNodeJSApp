@@ -34,7 +34,6 @@ var twitterSetup = function(deviceClient)
 			stream.on('data', function(event) {
 				console.log(event && event.text);
 				deviceClient.publish("status", "json", '{"d": {"text": ' + event.text + '}}');
-				++countTwitter;
 			});
 			
 			stream.on('error', function(error) {
