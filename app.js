@@ -10,7 +10,7 @@ var config = {
 	"id" : "device2",
 	"domain": "internetofthings.ibmcloud.com",
 	"type" : "device2",
-	"auth-method" : "token",
+	"auth-method" : process.env.IOT_AUTHMETHOD,
 	"auth-token" : "TtrzE4719lzYb39DVt"
 };
 var deviceClient = new Client.IotfDevice(config);
