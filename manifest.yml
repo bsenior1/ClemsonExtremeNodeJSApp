@@ -3,8 +3,8 @@ applications:
   memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: APP_NAME
-  host: APP_NAME
+  name: VCAP_APPLICATION.application_name
+  host: VCAP_APPLICATION.application_name
   disk_quota: 1024M
   services:
   - Weather Company Data-z4
