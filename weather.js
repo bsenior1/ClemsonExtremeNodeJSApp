@@ -15,7 +15,7 @@ var weatherSetup = function(deviceClient) {
 		if (timesGetWeatherCalled > 3)
 		{
 			clearInterval(self.weatherIntervalID);
-			//deviceClient.disconnect();
+			timesGetWeatherCalled = 0;
 		}
 		else
 		{

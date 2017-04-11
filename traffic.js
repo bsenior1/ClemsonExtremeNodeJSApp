@@ -14,6 +14,7 @@ var trafficSetup = function(deviceClient) {
 		if (timesGetTrafficCalled > 3)
 		{
 			clearInterval(self.trafficIntervalID);
+			timesGetTrafficCalled = 0;
 		}
 		else
 		{
