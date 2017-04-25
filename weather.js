@@ -27,7 +27,7 @@ var weatherSetup = function(deviceClient) {
 			function (error, response, body) {
 				console.log("forecast: " + JSON.stringify(body.forecasts[0]));
 				
-				console.log("EXAMPLE: " + JSON.stringify(body.forecast.expire_time_gmt));
+				console.log("EXAMPLE: " + JSON.stringify(body.forecast[0].expire_time_gmt));
 				//deviceClient.publish("status", "json", JSON.stringify(body.forecasts[0][2]));
 			});
 		}
