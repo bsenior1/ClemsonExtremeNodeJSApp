@@ -1,6 +1,6 @@
-# Node.js Data Analysis Application
+# Experimental Node.js Data Analysis Application
 
-The Node.js Application demonstrates the collection of various forms of information
+The Experimental Node.js Application demonstrates the collection of various forms of information in an experimental/unstable workspace
 
 ## Run on Bluemix with Varying Application Names - First Deploy
 
