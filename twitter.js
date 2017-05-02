@@ -49,7 +49,7 @@ var twitterSetup = function(deviceClient)
 				});
 				
 				console.log(event && event.text);
-				//deviceClient.publish("status","json",'{"d":{"type" : "twitter", "text" : ' + "\"" + event.text + "\"" + '}}');
+				deviceClient.publish("status","json",'{"d":{"type" : "twitter", "text" : ' + "\"" + event.text + "\"" + ", \"tone\" : " + tone[0] + '}}');
 			});
 			
 			stream.on('error', function(error) {
