@@ -45,24 +45,25 @@ var twitterSetup = function(deviceClient)
 					if (err)
 					  console.log(err);
 					else
-						console.log('{"d":{"type" : "twitter", "text" : ' + '"' + event.text + '"'
-					+ ', "anger" : ' + '"' + tone.document_tone.tone_categories[0].tones[0].score + '"'
-					+ ', "disgust" : ' + '"' + tone.document_tone.tone_categories[0].tones[1].score + '"'
-					+ ', "fear" : ' + '"' + tone.document_tone.tone_categories[0].tones[2].score + '"'
-					+ ', "joy" : ' + '"' + tone.document_tone.tone_categories[0].tones[3].score + '"'
- 					+ ', "sadeness" : ' + '"' + tone.document_tone.tone_categories[0].tones[4].score + '"' + '}}');
+					//	console.log('{"d":{"type" : "twitter", "text" : ' + "\"" + event.text + "\"" 
+					//+ ", \"anger\" : " + tone.document_tone.tone_categories[0].tones[0].score
+					//+ ", \"disgust\" : " + tone.document_tone.tone_categories[0].tones[1].score
+					//+ ", \"fear\" : " + tone.document_tone.tone_categories[0].tones[2].score
+					//+ ", \"joy\" : " + tone.document_tone.tone_categories[0].tones[3].score
+					//+ ", \"sadeness\" : " + tone.document_tone.tone_categories[0].tones[4].score + '}}');
+					
+					deviceClient.publish("status","json", '{"d":{"type" : "twitter", "text" : ' + '"' + event.text + '"'
+					+ ', "anger" : ' + tone.document_tone.tone_categories[0].tones[0].score
+					+ ', "disgust" : ' + tone.document_tone.tone_categories[0].tones[1].score
+					+ ', "fear" : ' + tone.document_tone.tone_categories[0].tones[2].score
+					+ ', "joy" : ' + tone.document_tone.tone_categories[0].tones[3].score
+					+ ', "sadeness" : ' + tone.document_tone.tone_categories[0].tones[4].score + '}}');
 					  //console.log(JSON.stringify(tone, null, 2));
 				});
 				
 				
 				console.log(event && event.text);
 				//deviceClient.publish("status","json", '{"d":{"type" : "twitter", "text" : ' + "\"" + event.text + '}}');
-				deviceClient.publish("status","json", '{"d":{"type" : "twitter", "text" : ' + '"' + event.text + '"'
-					+ ', "anger" : ' + '"' + tone.document_tone.tone_categories[0].tones[0].score + '"'
-					+ ', "disgust" : ' + '"' + tone.document_tone.tone_categories[0].tones[1].score + '"'
-					+ ', "fear" : ' + '"' + tone.document_tone.tone_categories[0].tones[2].score + '"'
-					+ ', "joy" : ' + '"' + tone.document_tone.tone_categories[0].tones[3].score + '"'
- 					+ ', "sadeness" : ' + '"' + tone.document_tone.tone_categories[0].tones[4].score + '"' + '}}');
 			});
 			
 			stream.on('error', function(error) {
