@@ -45,7 +45,8 @@ var twitterSetup = function(deviceClient)
 					if (err)
 					  console.log(err);
 					else
-					  console.log(JSON.stringify(tone, null, 2));
+						console.log('{"d":{"type" : "twitter", "text" : ' + "\"" + event.text + "\"" + ", \"tone\" : " + tone[0] + '}}');
+					  //console.log(JSON.stringify(tone, null, 2));
 				});
 				
 				console.log(event && event.text);
