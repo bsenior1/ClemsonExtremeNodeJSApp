@@ -1,5 +1,13 @@
 var twitterSetup = function(deviceClient) 
 {
+	var watson = require('watson-developer-cloud');
+	var tone_analyzer = watson.tone_analyzer({
+		username: '078725df-30c4-4cd2-9a9e-a66a09b74125',
+		password: 'yhYMQTt17GqJ',
+		version: 'v3',
+		version_date: '2016-05-19'
+	});
+	
 	// Self Referentiation
 	var self = this;
 	
@@ -32,8 +40,16 @@ var twitterSetup = function(deviceClient)
 			// NOTE: tweets are in a stream format
 			var stream = twitterClient.stream("statuses/filter", { locations: locationString });
 			stream.on('data', function(event) {
+				tone_analyzer.tone({ text: event.text },
+				  function(err, tone) {
+					if (err)
+					  console.log(err);
+					else
+					  console.log(JSON.stringify(tone, null, 2));
+				});
+				
 				console.log(event && event.text);
-				deviceClient.publish("status","json",'{"d":{"type" : "twitter", "text" : ' + "\"" + event.text + "\"" + '}}');
+				//deviceClient.publish("status","json",'{"d":{"type" : "twitter", "text" : ' + "\"" + event.text + "\"" + '}}');
 			});
 			
 			stream.on('error', function(error) {
