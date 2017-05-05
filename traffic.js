@@ -33,7 +33,6 @@ var trafficSetup = function(deviceClient) {
 				deviceClient.publish("status","json",'{"d":{"type" : "traffic", "description" : '+body.resourceSets[0].description+',"severity" : '+body.resourceSets[0].severity+'}}',1);
 			});	
 		}
-		++timesGetTrafficCalled;
 	}
 }
 

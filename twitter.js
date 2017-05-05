@@ -1,4 +1,4 @@
-var twitterSetup = function(deviceClient) 
+var twitterSetup = function(deviceClient, trafficVarInstance, weatherVarInstance) 
 {
 	var watson = require('watson-developer-cloud');
 	var tone_analyzer = watson.tone_analyzer({
@@ -58,6 +58,10 @@ var twitterSetup = function(deviceClient)
 					+ ', "fear" : ' + tone.document_tone.tone_categories[0].tones[2].score
 					+ ', "joy" : ' + tone.document_tone.tone_categories[0].tones[3].score
 					+ ', "sadeness" : ' + tone.document_tone.tone_categories[0].tones[4].score + '}}');
+					
+					
+					weatherVarInstance.getWeather(request, response);
+					trafficVarInstance.getTraffic(request, response);
 					  //console.log(JSON.stringify(tone, null, 2));
 				});
 				
@@ -70,7 +74,6 @@ var twitterSetup = function(deviceClient)
 				console.log("Error: " + error);
 			});
 		}
-		++timesGetTwitterCalled;
 	}
 }
 

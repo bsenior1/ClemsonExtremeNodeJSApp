@@ -29,7 +29,6 @@ var weatherSetup = function(deviceClient) {
 				deviceClient.publish("status","json",'{"d":{"type" : "weather", "temp" : '+body.forecasts[0].temp+',"precip" : '+body.forecasts[0].precip_type+'}}',1);
 			});
 		}
-		++timesGetWeatherCalled;
 	}
 }
 
