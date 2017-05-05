@@ -30,7 +30,7 @@ var trafficSetup = function(deviceClient) {
 				// Note: for just traffic data use body.resourceSets 
 				// New api key is required
 				console.log("traffic: " + JSON.stringify(body.resourceSets[0]));
-				deviceClient.publish("status","json",'{"d":{"type" : "traffic", "description" : '+body.resourceSets[0].description+',"severity" : '+body.resourceSets[0].severity+',"roadClosed" : '+body.resourceSets[0].roadClosed'}}',1););
+				deviceClient.publish("status","json",'{"d":{"type" : "traffic", "description" : '+body.resourceSets[0].description+',"severity" : '+body.resourceSets[0].severity+',"roadClosed" : '+body.resourceSets[0].roadClosed'}}',1);
 			});	
 		}
 		++timesGetTrafficCalled;
