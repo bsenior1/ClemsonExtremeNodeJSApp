@@ -31,11 +31,13 @@ deviceClient.on("error", function(err) {
 var weatherVar = require('./weather.js');
 var weatherVarInstance = new weatherVar(deviceClient);
 
-var twitterVar = require('./twitter.js');
-var twitterVarInstance = new twitterVar(deviceClient);
-
 var trafficVar = require('./traffic.js');
 var trafficVarInstance = new trafficVar(deviceClient);
+
+var twitterVar = require('./twitter.js');
+var twitterVarInstance = new twitterVar(deviceClient, trafficVarInstance, weatherVarInstance);
+
+
 
 // Create a new express server
 var app = express();
@@ -62,14 +64,14 @@ app.get('/process_get', function(req, res)
 	}, 10000);
 	
 	//Perform Weather Functionality every N milliseconds
-	weatherVarInstance.weatherIntervalID = setInterval(function() {
-		weatherVarInstance.getWeather(request, response);
-	}, 10000);
+	//weatherVarInstance.weatherIntervalID = setInterval(function() {
+		//weatherVarInstance.getWeather(request, response);
+	//}, 10000);
 
 	// Perform Traffic Functionality every N milliseconds
-	trafficVarInstance.trafficIntervalID = setInterval(function() {
-		trafficVarInstance.getTraffic(request, response);
-	}, 10000);
+	//trafficVarInstance.trafficIntervalID = setInterval(function() {
+		//trafficVarInstance.getTraffic(request, response);
+	//}, 10000);
 });
 
 
