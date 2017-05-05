@@ -19,15 +19,13 @@ var weatherSetup = function(deviceClient) {
 		}
 		else
 		{
-			console.log("WEATHER!!!");
 			var callURL = process.env.WEATHER_CALL_URL + "/api/weather/v1/geocode/" + response.lat1 + "/" + response.long1 + "/forecast/hourly/48hour.json?units=m&language=en-US";
 			request.get(callURL, {
 				json: true
 			},
 			function (error, response, body) {
+				// Console log the forecast and make new json
 				console.log("forecast: " + JSON.stringify(body.forecasts[0]));
-				
-				console.log(JSON.stringify(body.forecasts[0].temp));
 				deviceClient.publish("status","json",'{"d":{"type" : "weather", "temp" : '+body.forecasts[0].temp+',"precip" : '+body.forecasts[0].precip_type+'}}',1);
 			});
 		}

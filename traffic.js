@@ -29,8 +29,8 @@ var trafficSetup = function(deviceClient) {
 			function (error, response, body) {
 				// Note: for just traffic data use body.resourceSets 
 				// New api key is required
-				console.log("traffic: " + JSON.stringify(body));
-				deviceClient.publish("status", "json", JSON.stringify(body));
+				console.log("traffic: " + JSON.stringify(body.resourceSets[0]));
+				deviceClient.publish("status", "json", JSON.stringify(body.resourceSets[0]));
 			});	
 		}
 		++timesGetTrafficCalled;
